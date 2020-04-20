@@ -27,12 +27,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
         val adapter = QuestionListAdapter(this)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
-
 
         questionViewModel = ViewModelProvider(this).get(QuestionViewModel::class.java)
 
@@ -43,7 +41,6 @@ class MainActivity : AppCompatActivity() {
 
         val questionTypeActivity = Intent(this, Types::class.java)
         fab.setOnClickListener { view ->
-            //            startActivity(questionTypeActivity)
             startActivityForResult(questionTypeActivity, newQuestionActivityRequestCode)
         }
     }
@@ -56,16 +53,11 @@ class MainActivity : AppCompatActivity() {
             val question: Question? = data?.getParcelableExtra(QuestionDetails.REPLY_NEW_QUESTION)
             if (question != null) {
                 questionViewModel.insert(question)
-//                Unit
             }
-//            data?.getStringExtra(QuestionDetails.REPLY_NEW_QUESTION)?.let {
-//                val question = Question(it)
-//                questionViewModel.insert(question)
-//            }
         } else {
             Toast.makeText(
                 applicationContext,
-                "did not work!!!!!!!!!!",
+                "Did not work!!!!!!!!!!",
                 Toast.LENGTH_LONG).show()
         }
     }
