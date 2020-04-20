@@ -1,5 +1,7 @@
 package com.example.secwisdomapp
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.widget.RadioButton
 import android.widget.RadioGroup
@@ -27,6 +29,7 @@ class QuestionDetails : AppCompatActivity() {
                 "In details ", Snackbar.LENGTH_LONG
             )
                 .setAction("Action", null).show()
+            addQuestion()
         }
         val type = intent.getStringExtra("type")
         TypeText.text = type
@@ -44,14 +47,20 @@ class QuestionDetails : AppCompatActivity() {
         // question from QuestionText
 
         // Answer from this.currentAnswer
-        val type: QuestionType = QuestionType.valueOf(TypeText.text as String)
+//        val type: QuestionType = QuestionType.valueOf(TypeText.text as String)
+
+
+        val type: String = TypeText.text as String
+        //TODO check these fiels are full
         val question: String = QuestionText.text.toString()
         val answer: String = this.currenctAnswer.toString()
 
-        val newQuestion = Question(type, question, answer)
+        val newQuestion = Question(type=type, question=question, answer=answer)
+        val replyIntent = Intent()
 
-        // add to data base
-
+        replyIntent.putExtra(REPLY_NEW_QUESTION, newQuestion)
+        setResult(Activity.RESULT_OK, replyIntent)
+        finish()
     }
 
     private fun inflateQuestionAnswers() {
@@ -71,5 +80,9 @@ class QuestionDetails : AppCompatActivity() {
         }
     }
 
-
+    companion object {
+        const val REPLY_NEW_QUESTION = "new_question"
+    }
 }
+
+

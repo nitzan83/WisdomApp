@@ -52,12 +52,17 @@ class Types : AppCompatActivity() {
         if (this::currenctType.isInitialized) {
             val questionDetailsActivity = Intent(this, QuestionDetails::class.java)
             questionDetailsActivity.putExtra("type", this.currenctType.description)
-
-            startActivity(questionDetailsActivity)
+            startActivityForResult(questionDetailsActivity, newQuestionActivityRequestCode)
+//            startActivity(questionDetailsActivity)
         } else {
             val toast = Toast.makeText(applicationContext, "Fill question type", Toast.LENGTH_LONG)
             toast.show()
         }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        setResult(resultCode, data)
+        finish()
+    }
 }

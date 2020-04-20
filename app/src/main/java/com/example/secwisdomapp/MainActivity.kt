@@ -1,24 +1,72 @@
 package com.example.secwisdomapp
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.secwisdomapp.data.Question
+import com.example.secwisdomapp.data.QuestionViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 
+val newQuestionActivityRequestCode = 1
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var questionViewModel: QuestionViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-        val questionTypeActivity = Intent(this, Types::class.java)
 
+
+        val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
+        val adapter = QuestionListAdapter(this)
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(this)
+
+
+        questionViewModel = ViewModelProvider(this).get(QuestionViewModel::class.java)
+
+        questionViewModel.allQuestions.observe(this, Observer { questions ->
+            // Update the cached copy of the words in the adapter.
+            questions?.let { adapter.setQuestions(it) }
+        })
+
+        val questionTypeActivity = Intent(this, Types::class.java)
         fab.setOnClickListener { view ->
-            startActivity(questionTypeActivity)
+            //            startActivity(questionTypeActivity)
+            startActivityForResult(questionTypeActivity, newQuestionActivityRequestCode)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if ( resultCode == Activity.RESULT_OK)
+        {
+            val question: Question? = data?.getParcelableExtra(QuestionDetails.REPLY_NEW_QUESTION)
+            if (question != null) {
+                questionViewModel.insert(question)
+//                Unit
+            }
+//            data?.getStringExtra(QuestionDetails.REPLY_NEW_QUESTION)?.let {
+//                val question = Question(it)
+//                questionViewModel.insert(question)
+//            }
+        } else {
+            Toast.makeText(
+                applicationContext,
+                "did not work!!!!!!!!!!",
+                Toast.LENGTH_LONG).show()
         }
     }
 

@@ -12,14 +12,10 @@
         <activity
             android:name=".QuestionDetails"
             android:label="@string/title_activity_question_details"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Types"
             android:label="@string/title_activity_types"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".QuestionType"
-            android:label="@string/title_activity_question_type"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".MainActivity"
