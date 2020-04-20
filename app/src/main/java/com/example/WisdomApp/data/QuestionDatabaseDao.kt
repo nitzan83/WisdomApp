@@ -1,4 +1,4 @@
-package com.example.secwisdomapp.data
+package com.example.WisdomApp.data
 
 import androidx.lifecycle.LiveData
 import androidx.room.*

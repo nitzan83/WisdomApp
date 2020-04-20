@@ -1,4 +1,4 @@
-package com.example.secwisdomapp.data
+package com.example.WisdomApp.data
 
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData

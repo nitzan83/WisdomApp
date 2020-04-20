@@ -1,4 +1,4 @@
-package com.example.secwisdomapp
+package com.example.WisdomApp
 
 import android.app.Activity
 import android.content.Intent
@@ -11,9 +11,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.secwisdomapp.data.Question
-import com.example.secwisdomapp.data.QuestionViewModel
-import com.google.android.material.snackbar.Snackbar
+import com.example.WisdomApp.data.Question
+import com.example.WisdomApp.data.QuestionViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 val newQuestionActivityRequestCode = 1

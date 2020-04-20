@@ -1,4 +1,4 @@
-package com.example.secwisdomapp
+package com.example.WisdomApp
 
 import android.app.Activity
 import android.content.Intent
@@ -6,13 +6,11 @@ import android.os.Bundle
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import androidx.appcompat.app.AppCompatActivity
-import com.example.secwisdomapp.data.AnswerYesNo
-import com.example.secwisdomapp.data.Question
-import com.example.secwisdomapp.data.QuestionType
+import com.example.WisdomApp.data.AnswerYesNo
+import com.example.WisdomApp.data.Question
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_question_details.*
 import kotlinx.android.synthetic.main.content_question_details.*
-import kotlinx.android.synthetic.main.content_types.*
 
 
 class QuestionDetails : AppCompatActivity() {

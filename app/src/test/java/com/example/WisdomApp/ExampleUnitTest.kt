@@ -1,4 +1,4 @@
-package com.example.secwisdomapp
+package com.example.WisdomApp
 
 import org.junit.Test
 

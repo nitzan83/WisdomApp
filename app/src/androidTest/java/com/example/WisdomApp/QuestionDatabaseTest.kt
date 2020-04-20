@@ -1,12 +1,12 @@
-package com.example.secwisdomapp
+package com.example.WisdomApp
 
 import androidx.room.Room
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import com.example.secwisdomapp.data.Question
-import com.example.secwisdomapp.data.QuestionDatabase
-import com.example.secwisdomapp.data.QuestionDatabaseDao
-import com.example.secwisdomapp.data.QuestionType
+import com.example.WisdomApp.data.Question
+import com.example.WisdomApp.data.QuestionDatabase
+import com.example.WisdomApp.data.QuestionDatabaseDao
+import com.example.WisdomApp.data.QuestionType
 
 import org.junit.Assert.assertEquals
 import org.junit.After

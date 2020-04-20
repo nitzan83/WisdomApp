@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.secwisdomapp">
+    package="com.example.WisdomApp">
 
     <application
         android:allowBackup="true"
@@ -10,15 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".QuestionDetails"
+            android:name="com.example.WisdomApp.QuestionDetails"
             android:label="@string/title_activity_question_details"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Types"
+            android:name="com.example.WisdomApp.Types"
             android:label="@string/title_activity_types"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.WisdomApp.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>

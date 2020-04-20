@@ -1,4 +1,4 @@
-package com.example.secwisdomapp.data
+package com.example.WisdomApp.data
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

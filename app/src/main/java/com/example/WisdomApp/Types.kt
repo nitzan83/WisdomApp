@@ -1,4 +1,4 @@
-package com.example.secwisdomapp
+package com.example.WisdomApp
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -6,10 +6,8 @@ import android.os.Bundle
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.Toast
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
-import com.example.secwisdomapp.data.Question
-import com.example.secwisdomapp.data.QuestionType
+import com.example.WisdomApp.data.QuestionType
 
 import kotlinx.android.synthetic.main.activity_types.*
 import kotlinx.android.synthetic.main.content_types.*
