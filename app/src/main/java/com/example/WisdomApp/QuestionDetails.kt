@@ -40,7 +40,7 @@ class QuestionDetails : AppCompatActivity() {
     private fun addQuestion()
     {
         val type: String = TypeText.text as String
-        //TODO check these fiels are full
+        //TODO: add checks if these fields are full
         val question: String = QuestionText.text.toString()
         val answer: String = this.currenctAnswer.description
 

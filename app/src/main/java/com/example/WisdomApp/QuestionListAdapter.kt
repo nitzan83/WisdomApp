@@ -19,9 +19,10 @@ class QuestionListAdapter internal constructor(
     private var questions = emptyList<Question>() // Cached copy of questions
 
     inner class QuestionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        // A class that contains all view elements for one item 
         val questionItemView: TextView = itemView.findViewById(R.id.questionTextView)
         val answerItemView: TextView = itemView.findViewById(R.id.answerTextView)
-        val deleteButton: Button = itemView.findViewById(R.id.delete_question_button)
+        val deleteButton: Button = itemView.findViewById(R.id.deleteQuestionButton)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuestionViewHolder {
@@ -30,8 +31,8 @@ class QuestionListAdapter internal constructor(
     }
 
     override fun onBindViewHolder(holder: QuestionViewHolder, position: Int) {
+        // Binds the view holder to a position 
         val current = questions[position]
-
         holder.questionItemView.text = current.question
         holder.answerItemView.text = current.answer
         holder.deleteButton.setOnClickListener{ deleteCallback(current.questionId) }

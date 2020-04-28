@@ -51,7 +51,6 @@ class Types : AppCompatActivity() {
             val questionDetailsActivity = Intent(this, QuestionDetails::class.java)
             questionDetailsActivity.putExtra("type", this.currenctType.description)
             startActivityForResult(questionDetailsActivity, newQuestionActivityRequestCode)
-//            startActivity(questionDetailsActivity)
         } else {
             val toast = Toast.makeText(applicationContext, "Fill question type", Toast.LENGTH_LONG)
             toast.show()
