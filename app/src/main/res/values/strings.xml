@@ -19,4 +19,5 @@
     <string name="wisdom_notification_channel_id">wisdom_channel</string>
     <string name="wisdom_notification_channel_name">Wisdom</string>
     <string name="delete">Delete</string>
+    <string name="wisdom_push">Wisdom push!</string>
 </resources>

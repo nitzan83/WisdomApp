@@ -29,11 +29,11 @@ class QuestionDetails : AppCompatActivity() {
                 .setAction("Action", null).show()
             addQuestion()
         }
+        // TODO: change extra to const string in xml
         val type = intent.getStringExtra("type")
         TypeText.text = type
 
-        // later all the answer part can be in a fragment and than will have a different way foe
-        // each question type
+        //TODO: answer part can be in a fragment and than will have a different way for each question type
         inflateQuestionAnswers()
     }
 

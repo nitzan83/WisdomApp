@@ -1,12 +1,12 @@
 package com.example.WisdomApp
 
-import android.app.Activity
-import android.app.NotificationChannel
-import android.app.NotificationManager
+import android.app.*
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.WisdomApp.data.Question
 import com.example.WisdomApp.data.QuestionViewModel
+import com.example.WisdomApp.notification.AlarmReceiver
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -25,6 +26,7 @@ val newQuestionActivityRequestCode = 1
 class MainActivity : AppCompatActivity() {
 
     private lateinit var questionViewModel: QuestionViewModel
+    private lateinit var alarmManager: AlarmManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
-        var lambda = {id: Long -> questionViewModel.remove_by_id(id) }
+        val lambda = { id: Long -> questionViewModel.remove_by_id(id) }
         val adapter = QuestionListAdapter(this, lambda)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -53,6 +55,8 @@ class MainActivity : AppCompatActivity() {
             getString(R.string.wisdom_notification_channel_id),
             getString(R.string.wisdom_notification_channel_name)
         )
+
+        alarmManager = application.getSystemService(Context.ALARM_SERVICE) as AlarmManager
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -62,6 +66,16 @@ class MainActivity : AppCompatActivity() {
         {
             val question: Question? = data?.getParcelableExtra(QuestionDetails.REPLY_NEW_QUESTION)
             if (question != null) {
+                val intent = Intent(this, AlarmReceiver::class.java)
+
+                val pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0)
+
+                //TODO: change to question interval
+                val timeInterval = 5 * 1_000L
+                val alarmTime = System.currentTimeMillis() + 5_000L
+
+                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, alarmTime, timeInterval , pendingIntent)
+
                 questionViewModel.insert(question)
             }
         } else {
@@ -109,10 +123,7 @@ class MainActivity : AppCompatActivity() {
 
             val notificationManager = getSystemService(NotificationManager::class.java)
             notificationManager?.createNotificationChannel(notificationChannel)
-
         }
         // TODO: Step 1.6 END create a channel
     }
-
-
 }

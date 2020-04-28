@@ -1,15 +1,24 @@
 package com.example.WisdomApp.data
 
+import android.app.AlarmManager
 import android.app.Application
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
 import android.util.Log
+import androidx.core.app.AlarmManagerCompat
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
+import com.example.WisdomApp.notification.AlarmReceiver
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.util.logging.Logger
 
-class QuestionViewModel(application: Application) : AndroidViewModel(application) {
+class QuestionViewModel(
+    application: Application
+) : AndroidViewModel(application) {
+
+
 
     private val repository: QuestionRepository
     // Using LiveData and caching what getAlphabetizedQuestions returns has several benefits:
@@ -29,6 +38,7 @@ class QuestionViewModel(application: Application) : AndroidViewModel(application
      */
     fun insert(question: Question) = viewModelScope.launch(Dispatchers.IO) {
         Log.v("Hey", "Inserting question id ${question.questionId}")
+
         repository.insert(question)
     }
 

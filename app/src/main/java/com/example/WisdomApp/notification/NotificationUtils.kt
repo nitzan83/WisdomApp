@@ -70,13 +70,13 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
     // Build the notification
     val builder = NotificationCompat.Builder(
         applicationContext,
-        applicationContext.getString(R.string.question_notification_channel_id)
+        applicationContext.getString(R.string.wisdom_notification_channel_id)
     )
 
     // TODO: Step 1.8 use the new 'breakfast' notification channel
 
     // TODO: Step 1.3 set title, text and icon to builder
-//        .setSmallIcon(R.drawable.cooked_egg)
+        .setSmallIcon(R.mipmap.ic_launcher_round)
         .setContentTitle(applicationContext
             .getString(R.string.notification_title))
         .setContentText(messageBody)
