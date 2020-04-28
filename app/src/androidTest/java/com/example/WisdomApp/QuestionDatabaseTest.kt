@@ -5,7 +5,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.example.WisdomApp.data.Question
 import com.example.WisdomApp.data.QuestionDatabase
-import com.example.WisdomApp.data.QuestionDatabaseDao
+import com.example.WisdomApp.data.QuestionDao
 import com.example.WisdomApp.data.QuestionType
 
 import org.junit.Assert.assertEquals
@@ -17,7 +17,7 @@ import java.io.IOException
 
 @RunWith(AndroidJUnit4::class)
 class SleepDatabaseTest {
-    private lateinit var questionDao: QuestionDatabaseDao
+    private lateinit var questionDao: QuestionDao
     private lateinit var db: QuestionDatabase
     @Before
     fun createDb() {
@@ -44,6 +44,19 @@ class SleepDatabaseTest {
         this.questionDao.insert(newQuestion)
         val firstQuestion = this.questionDao.get(1)
         assertEquals(firstQuestion?.type, QuestionType.YES_NO.description)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun insertAndDelete() {
+        val newQuestion = Question(type = QuestionType.YES_NO.description, question = "Hello?", answer = "Yes")
+        this.questionDao.insert(newQuestion)
+
+        this.questionDao.removeById(newQuestion.questionId)
+
+        val firstQuestion = this.questionDao.get(newQuestion.questionId)
+
+        assertEquals(firstQuestion, null)
     }
 
 }

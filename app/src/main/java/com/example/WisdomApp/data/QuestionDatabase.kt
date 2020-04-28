@@ -9,10 +9,10 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-@Database(entities = [Question::class], version = 1)
+@Database(entities = [Question::class], version = 2)
 abstract class QuestionDatabase : RoomDatabase() {
 //    abstract val questionDatabaseDao: QuestionDatabaseDao
-    abstract fun questionDao(): QuestionDatabaseDao
+    abstract fun questionDao(): QuestionDao
 
     companion object {
         @Volatile
@@ -50,7 +50,7 @@ abstract class QuestionDatabase : RoomDatabase() {
             }
         }
 
-        fun populateDatabase(questionDao: QuestionDatabaseDao) {
+        fun populateDatabase(questionDao: QuestionDao) {
             // Start the app with a clean database every time.
             // Not needed if you only populate on creation.
 
@@ -58,11 +58,11 @@ abstract class QuestionDatabase : RoomDatabase() {
             questionDao.clear()
 
             // Add sample questions.
-            var question = Question(type = QuestionType.YES_NO.description, question = "Hello?", answer = "Yes")
-            questionDao.insert(question)
-
-            question = Question(type = QuestionType.YES_NO.description, question = "Anyone here?", answer = "Yes")
-            questionDao.insert(question)
+//            var question = Question(type = QuestionType.YES_NO.description, question = "Hello?", answer = "Yes")
+//            questionDao.insert(question)
+//
+//            question = Question(type = QuestionType.YES_NO.description, question = "Anyone here?", answer = "Yes")
+//            questionDao.insert(question)
         }
     }
 }

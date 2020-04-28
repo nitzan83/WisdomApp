@@ -39,19 +39,10 @@ class QuestionDetails : AppCompatActivity() {
 
     private fun addQuestion()
     {
-        // Create question from type, question and answer
-        // type from intent
-
-        // question from QuestionText
-
-        // Answer from this.currentAnswer
-//        val type: QuestionType = QuestionType.valueOf(TypeText.text as String)
-
-
         val type: String = TypeText.text as String
         //TODO check these fiels are full
         val question: String = QuestionText.text.toString()
-        val answer: String = this.currenctAnswer.toString()
+        val answer: String = this.currenctAnswer.description
 
         val newQuestion = Question(type=type, question=question, answer=answer)
         val replyIntent = Intent()

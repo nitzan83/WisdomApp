@@ -12,4 +12,11 @@
     <string name="title_activity_question_type">QuestionType</string>
     <string name="title_activity_types">Types</string>
     <string name="title_activity_question_details">QuestionDetails</string>
+    <string name="nitzan">HEY nitzan here</string>
+    <string name="question_notification_channel_id">question_channel</string>
+    <string name="notification_title">My cool title!</string>
+    <string name="wisdom_notification_channel_description">Wisdom reminder</string>
+    <string name="wisdom_notification_channel_id">wisdom_channel</string>
+    <string name="wisdom_notification_channel_name">Wisdom</string>
+    <string name="delete">Delete</string>
 </resources>

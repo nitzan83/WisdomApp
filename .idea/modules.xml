@@ -3,8 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/SecWisdomApp.iml" filepath="$PROJECT_DIR$/SecWisdomApp.iml" group="SecWisdomApp" />
-      <module fileurl="file://$PROJECT_DIR$/WisdomApp-SecWisdomApp.iml" filepath="$PROJECT_DIR$/WisdomApp-SecWisdomApp.iml" group="SecWisdomApp" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="SecWisdomApp/app" />
+      <module fileurl="file://$PROJECT_DIR$/WisdomApp.iml" filepath="$PROJECT_DIR$/WisdomApp.iml" group="WisdomApp" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="WisdomApp/app" />
     </modules>
   </component>
 </project>
