@@ -11,7 +11,6 @@ import kotlinx.coroutines.launch
 
 @Database(entities = [Question::class], version = 2)
 abstract class QuestionDatabase : RoomDatabase() {
-//    abstract val questionDatabaseDao: QuestionDatabaseDao
     abstract fun questionDao(): QuestionDao
 
     companion object {

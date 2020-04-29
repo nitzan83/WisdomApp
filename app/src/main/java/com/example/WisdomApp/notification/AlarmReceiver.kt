@@ -13,7 +13,7 @@ class AlarmReceiver: BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
 
-        Log.v("Hey", "in onReceive")
+        Log.v("Hey", "in onReceive for ")
         // TODO: Step 1.10 [Optional] remove toast
         Toast.makeText(context, context.getText(R.string.wisdom_push), Toast.LENGTH_SHORT).show()
 

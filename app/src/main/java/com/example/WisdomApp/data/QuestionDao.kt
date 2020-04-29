@@ -6,7 +6,7 @@ import androidx.room.*
 @Dao
 interface QuestionDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insert(question: Question)
+    fun insert(question: Question) : Long
 
     @Update
     fun update(question: Question)

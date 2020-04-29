@@ -6,11 +6,11 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,10 +18,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.WisdomApp.data.Question
 import com.example.WisdomApp.data.QuestionViewModel
 import com.example.WisdomApp.notification.AlarmReceiver
+import com.example.WisdomApp.notification.cancelNotifications
 import kotlinx.android.synthetic.main.activity_main.*
 
 
 val newQuestionActivityRequestCode = 1
+val ALARM_RECEIVER_ACTION = "action"
 
 class MainActivity : AppCompatActivity() {
 
@@ -34,13 +36,14 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
-        val lambda = { id: Long -> questionViewModel.remove_by_id(id) }
-        val adapter = QuestionListAdapter(this, lambda)
+
+        val deleteCallback = { id: Long -> questionViewModel.removeById(id) }
+        val adapter = QuestionListAdapter(this, deleteCallback)
+
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         questionViewModel = ViewModelProvider(this).get(QuestionViewModel::class.java)
-
         questionViewModel.allQuestions.observe(this, Observer { questions ->
             // Update the cached copy of the words in the adapter.
             questions?.let { adapter.setQuestions(it) }
@@ -59,30 +62,26 @@ class MainActivity : AppCompatActivity() {
         alarmManager = application.getSystemService(Context.ALARM_SERVICE) as AlarmManager
     }
 
+    private fun getAlarmIntent(): Intent {
+        val intent = Intent(this, AlarmReceiver::class.java)
+        intent.action = ALARM_RECEIVER_ACTION
+        return intent
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if ( resultCode == Activity.RESULT_OK)
-        {
+        if (resultCode == Activity.RESULT_OK) {
             val question: Question? = data?.getParcelableExtra(QuestionDetails.REPLY_NEW_QUESTION)
             if (question != null) {
-                val intent = Intent(this, AlarmReceiver::class.java)
-
-                val pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0)
-
-                //TODO: change to question interval
-                val timeInterval = 5 * 1_000L
-                val alarmTime = System.currentTimeMillis() + 5_000L
-
-                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, alarmTime, timeInterval , pendingIntent)
-
                 questionViewModel.insert(question)
             }
         } else {
             Toast.makeText(
                 applicationContext,
                 "Did not work!!!!!!!!!!",
-                Toast.LENGTH_LONG).show()
+                Toast.LENGTH_LONG
+            ).show()
         }
     }
 
@@ -119,7 +118,8 @@ class MainActivity : AppCompatActivity() {
             notificationChannel.enableLights(true)
             notificationChannel.lightColor = Color.RED
             notificationChannel.enableVibration(true)
-            notificationChannel.description = getString(R.string.wisdom_notification_channel_description)
+            notificationChannel.description =
+                getString(R.string.wisdom_notification_channel_description)
 
             val notificationManager = getSystemService(NotificationManager::class.java)
             notificationManager?.createNotificationChannel(notificationChannel)

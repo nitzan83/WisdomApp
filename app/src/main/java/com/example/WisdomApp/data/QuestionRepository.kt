@@ -10,13 +10,13 @@ class QuestionRepository(private val questionDao: QuestionDao) {
 
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
-    suspend fun insert(word: Question) {
-        questionDao.insert(word)
+    suspend fun insert(word: Question) : Long {
+        return questionDao.insert(word)
     }
 
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
-    suspend fun remove_by_id(id: Long) {
+    suspend fun removeById(id: Long) {
         questionDao.removeById(id)
     }
 
