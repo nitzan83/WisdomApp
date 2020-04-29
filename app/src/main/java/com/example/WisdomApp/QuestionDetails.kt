@@ -8,13 +8,21 @@ import android.widget.RadioGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.example.WisdomApp.data.AnswerYesNo
 import com.example.WisdomApp.data.Question
+import com.example.WisdomApp.utils.intervalInSeconds
+import com.example.WisdomApp.utils.intervalOptionToSeconds
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_question_details.*
 import kotlinx.android.synthetic.main.content_question_details.*
 
+val radioGroupParams = RadioGroup.LayoutParams(
+    RadioGroup.LayoutParams.WRAP_CONTENT,
+    RadioGroup.LayoutParams.WRAP_CONTENT
+)
 
 class QuestionDetails : AppCompatActivity() {
     private lateinit var currenctAnswer: AnswerYesNo
+    private lateinit var timeOption: String
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,21 +43,40 @@ class QuestionDetails : AppCompatActivity() {
 
         //TODO: answer part can be in a fragment and than will have a different way for each question type
         inflateQuestionAnswers()
+        inflateTimeOptions()
     }
 
-    private fun addQuestion()
-    {
+    private fun addQuestion() {
         val type: String = TypeText.text as String
         //TODO: add checks if these fields are full
         val question: String = QuestionText.text.toString()
         val answer: String = this.currenctAnswer.description
 
-        val newQuestion = Question(type=type, question=question, answer=answer)
+        val newQuestion =
+            intervalInSeconds(this.timeOption, TimeText.text.toString().toLong())?.let {
+                Question(
+                    type = type,
+                    question = question,
+                    answer = answer,
+                    interval = it
+                )
+            }
+
         val replyIntent = Intent()
 
         replyIntent.putExtra(REPLY_NEW_QUESTION, newQuestion)
         setResult(Activity.RESULT_OK, replyIntent)
+
         finish()
+    }
+
+    private fun inflateTimeOptions() {
+        intervalOptionToSeconds.keys.forEach { option ->
+            val btn = RadioButton(this)
+            btn.text = option
+            btn.setOnClickListener { this.timeOption = option }
+            TimeOptions.addView(btn, radioGroupParams)
+        }
     }
 
     private fun inflateQuestionAnswers() {
@@ -60,12 +87,7 @@ class QuestionDetails : AppCompatActivity() {
 
             btn.setOnClickListener { this.currenctAnswer = answer }
 
-            // TODO maybe move this into a const so all radio groups can use it
-            val params = RadioGroup.LayoutParams(
-                RadioGroup.LayoutParams.WRAP_CONTENT,
-                RadioGroup.LayoutParams.WRAP_CONTENT)
-
-            QuestionAnswers.addView(btn, params)
+            QuestionAnswers.addView(btn, radioGroupParams)
         }
     }
 

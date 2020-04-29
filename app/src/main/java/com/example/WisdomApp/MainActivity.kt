@@ -50,8 +50,11 @@ class MainActivity : AppCompatActivity() {
         })
 
         val questionTypeActivity = Intent(this, Types::class.java)
-        fab.setOnClickListener { view ->
-            startActivityForResult(questionTypeActivity, newQuestionActivityRequestCode)
+        fab.setOnClickListener {
+            startActivityForResult(
+                questionTypeActivity,
+                newQuestionActivityRequestCode
+            )
         }
 
         createChannel(
@@ -79,7 +82,7 @@ class MainActivity : AppCompatActivity() {
         } else {
             Toast.makeText(
                 applicationContext,
-                "Did not work!!!!!!!!!!",
+                "Did not add question! Problem with details",
                 Toast.LENGTH_LONG
             ).show()
         }
@@ -103,7 +106,6 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun createChannel(channelId: String, channelName: String) {
-        // TODO: Step 1.6 START create a channel
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val notificationChannel = NotificationChannel(
                 channelId,
@@ -124,6 +126,5 @@ class MainActivity : AppCompatActivity() {
             val notificationManager = getSystemService(NotificationManager::class.java)
             notificationManager?.createNotificationChannel(notificationChannel)
         }
-        // TODO: Step 1.6 END create a channel
     }
 }
