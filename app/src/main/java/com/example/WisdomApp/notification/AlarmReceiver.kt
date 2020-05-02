@@ -12,12 +12,8 @@ import com.example.WisdomApp.R
 class AlarmReceiver: BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
-
-        Log.v("Hey", "in onReceive for ")
-        // TODO: Step 1.10 [Optional] remove toast
+        Log.v(R.string.log_tag.toString(), "in onReceive for ")
         Toast.makeText(context, context.getText(R.string.wisdom_push), Toast.LENGTH_SHORT).show()
-
-        // TODO: Step 1.9 add call to sendNotification
         val notificationManager = ContextCompat.getSystemService(
             context,
             NotificationManager::class.java

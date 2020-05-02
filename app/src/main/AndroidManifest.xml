@@ -11,11 +11,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.example.WisdomApp.QuestionDetails"
+            android:name="com.example.WisdomApp.DetailsActivity"
             android:label="@string/title_activity_question_details"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.example.WisdomApp.Types"
+            android:name="com.example.WisdomApp.TypesActivity"
             android:label="@string/title_activity_types"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

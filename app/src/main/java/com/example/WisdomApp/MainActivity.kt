@@ -10,7 +10,6 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.WisdomApp.data.Question
 import com.example.WisdomApp.data.QuestionViewModel
 import com.example.WisdomApp.notification.AlarmReceiver
-import com.example.WisdomApp.notification.cancelNotifications
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -49,7 +47,7 @@ class MainActivity : AppCompatActivity() {
             questions?.let { adapter.setQuestions(it) }
         })
 
-        val questionTypeActivity = Intent(this, Types::class.java)
+        val questionTypeActivity = Intent(this, TypesActivity::class.java)
         fab.setOnClickListener {
             startActivityForResult(
                 questionTypeActivity,
@@ -75,7 +73,7 @@ class MainActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (resultCode == Activity.RESULT_OK) {
-            val question: Question? = data?.getParcelableExtra(QuestionDetails.REPLY_NEW_QUESTION)
+            val question: Question? = data?.getParcelableExtra(DetailsActivity.REPLY_NEW_QUESTION)
             if (question != null) {
                 questionViewModel.insert(question)
             }
@@ -110,12 +108,8 @@ class MainActivity : AppCompatActivity() {
             val notificationChannel = NotificationChannel(
                 channelId,
                 channelName,
-                // TODO: Step 2.4 change importance
                 NotificationManager.IMPORTANCE_HIGH
-            )// TODO: Step 2.6 disable badges for this channel
-                .apply {
-                    setShowBadge(false)
-                }
+            ).apply { setShowBadge(false) }
 
             notificationChannel.enableLights(true)
             notificationChannel.lightColor = Color.RED

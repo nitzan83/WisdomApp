@@ -4,11 +4,9 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
+// Added time interval between DB versions
 @Database(entities = [Question::class], version = 3)
 abstract class QuestionDatabase : RoomDatabase() {
     abstract fun questionDao(): QuestionDao
@@ -38,30 +36,5 @@ abstract class QuestionDatabase : RoomDatabase() {
 
     private class QuestionDatabaseCallback(
         private val scope: CoroutineScope
-    ) : RoomDatabase.Callback() {
-
-        override fun onOpen(db: SupportSQLiteDatabase) {
-            super.onOpen(db)
-            INSTANCE?.let { database ->
-                scope.launch(Dispatchers.IO) {
-                    populateDatabase(database.questionDao())
-                }
-            }
-        }
-
-        fun populateDatabase(questionDao: QuestionDao) {
-            // Start the app with a clean database every time.
-            // Not needed if you only populate on creation.
-
-            // Delete all content here.
-            questionDao.clear()
-
-            // Add sample questions.
-//            var question = Question(type = QuestionType.YES_NO.description, question = "Hello?", answer = "Yes")
-//            questionDao.insert(question)
-//
-//            question = Question(type = QuestionType.YES_NO.description, question = "Anyone here?", answer = "Yes")
-//            questionDao.insert(question)
-        }
-    }
+    ) : RoomDatabase.Callback()
 }

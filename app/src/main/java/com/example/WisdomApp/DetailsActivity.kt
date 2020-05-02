@@ -10,19 +10,14 @@ import com.example.WisdomApp.data.AnswerYesNo
 import com.example.WisdomApp.data.Question
 import com.example.WisdomApp.utils.intervalInSeconds
 import com.example.WisdomApp.utils.intervalOptionToSeconds
+import com.example.WisdomApp.utils.radioGroupLayoutParams
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_question_details.*
 import kotlinx.android.synthetic.main.content_question_details.*
 
-val radioGroupParams = RadioGroup.LayoutParams(
-    RadioGroup.LayoutParams.WRAP_CONTENT,
-    RadioGroup.LayoutParams.WRAP_CONTENT
-)
-
-class QuestionDetails : AppCompatActivity() {
+class DetailsActivity : AppCompatActivity() {
     private lateinit var currenctAnswer: AnswerYesNo
     private lateinit var timeOption: String
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,7 +71,7 @@ class QuestionDetails : AppCompatActivity() {
             val btn = RadioButton(this)
             btn.text = option
             btn.setOnClickListener { this.timeOption = option }
-            TimeOptions.addView(btn, radioGroupParams)
+            TimeOptions.addView(btn, radioGroupLayoutParams)
         }
     }
 
@@ -88,7 +83,7 @@ class QuestionDetails : AppCompatActivity() {
 
             btn.setOnClickListener { this.currenctAnswer = answer }
 
-            QuestionAnswers.addView(btn, radioGroupParams)
+            QuestionAnswers.addView(btn, radioGroupLayoutParams)
         }
     }
 

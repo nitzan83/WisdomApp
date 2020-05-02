@@ -10,6 +10,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.example.WisdomApp.ALARM_RECEIVER_ACTION
+import com.example.WisdomApp.R
 import com.example.WisdomApp.notification.AlarmReceiver
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -42,9 +43,9 @@ class QuestionViewModel(application: Application) : AndroidViewModel(application
      * Launching a new coroutine to insert the data in a non-blocking way
      */
     fun insert(question: Question) = viewModelScope.launch(Dispatchers.IO) {
-        Log.v("Hey", "Inserting question")
+        Log.v(R.string.log_tag.toString(), "Inserting question")
         val id = repository.insert(question)
-        Log.v("Hey", "New question id ${question.questionId}")
+        Log.v(R.string.log_tag.toString(), "New question id ${question.questionId}")
 
         val pendingIntent = PendingIntent.getBroadcast(
             getApplication(),
@@ -60,7 +61,7 @@ class QuestionViewModel(application: Application) : AndroidViewModel(application
     }
 
     fun removeById(id: Long) = viewModelScope.launch(Dispatchers.IO) {
-        Log.v("Hey", "Removeing question id $id")
+        Log.v(R.string.log_tag.toString(), "Removeing question id $id")
         // Cancel notification
         PendingIntent.getBroadcast(
             getApplication(),

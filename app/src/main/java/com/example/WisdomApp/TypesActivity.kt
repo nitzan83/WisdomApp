@@ -4,16 +4,16 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.RadioButton
-import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.WisdomApp.data.QuestionType
+import com.example.WisdomApp.utils.radioGroupLayoutParams
 
 import kotlinx.android.synthetic.main.activity_types.*
 import kotlinx.android.synthetic.main.content_types.*
 
 
-class Types : AppCompatActivity() {
+class TypesActivity : AppCompatActivity() {
     private lateinit var currenctType: QuestionType
 
     @SuppressLint("ResourceType")
@@ -22,9 +22,7 @@ class Types : AppCompatActivity() {
         setContentView(R.layout.activity_types)
         setSupportActionBar(toolbar)
 
-        fab.setOnClickListener {
-            moveToQuestionDetails()
-        }
+        fab.setOnClickListener {moveToQuestionDetails()}
 
         inflateQuestionTypes()
     }
@@ -37,18 +35,13 @@ class Types : AppCompatActivity() {
 
             btn.setOnClickListener { this.currenctType = type }
 
-            val params = RadioGroup.LayoutParams(
-                RadioGroup.LayoutParams.WRAP_CONTENT,
-                RadioGroup.LayoutParams.WRAP_CONTENT
-            )
-
-            QuestionTypes.addView(btn, params)
+            QuestionTypes.addView(btn, radioGroupLayoutParams)
         }
     }
 
     private fun moveToQuestionDetails() {
         if (this::currenctType.isInitialized) {
-            val questionDetailsActivity = Intent(this, QuestionDetails::class.java)
+            val questionDetailsActivity = Intent(this, DetailsActivity::class.java)
             questionDetailsActivity.putExtra("type", this.currenctType.description)
             startActivityForResult(questionDetailsActivity, newQuestionActivityRequestCode)
         } else {
