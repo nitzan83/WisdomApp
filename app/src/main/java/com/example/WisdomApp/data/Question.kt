@@ -22,7 +22,11 @@ data class Question(
     @ColumnInfo(name = "answer")
     var answer: String,
 
+    // Save time in milliseconds
     @ColumnInfo(name = "interval")
-    var interval: Long = AlarmManager.INTERVAL_FIFTEEN_MINUTES
+    var interval: Long,
+
+    @ColumnInfo(name = "interval_type")
+    var intervalType: String
 
 ) : Parcelable

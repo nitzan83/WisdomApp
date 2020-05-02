@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.WisdomApp.data.Question
+import com.example.WisdomApp.utils.intervalInTimeOption
 import kotlinx.coroutines.Job
 
 class QuestionListAdapter internal constructor(
@@ -37,9 +38,10 @@ class QuestionListAdapter internal constructor(
         val question = questions[position]
         holder.questionItemView.text = question.question
         holder.answerItemView.text = question.answer
-        holder.intervalItemView.text = question.interval.toString()
-//        intervalInTimeOption()
-        holder.deleteButton.setOnClickListener{ deleteCallback(question.questionId) }
+        holder.intervalItemView.text = "${intervalInTimeOption(question.intervalType, question.interval).toString()} ${question.intervalType}"
+
+
+        holder.deleteButton.setOnClickListener { deleteCallback(question.questionId) }
     }
 
     internal fun setQuestions(questions: List<Question>) {

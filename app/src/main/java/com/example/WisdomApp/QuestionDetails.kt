@@ -58,7 +58,8 @@ class QuestionDetails : AppCompatActivity() {
                     type = type,
                     question = question,
                     answer = answer,
-                    interval = it
+                    interval = it,
+                    intervalType = this.timeOption
                 )
             }
 

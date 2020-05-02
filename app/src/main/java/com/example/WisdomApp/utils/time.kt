@@ -21,5 +21,6 @@ Input: interval type, interval in seconds
 Output: interval in wanted type
  */
 fun intervalInTimeOption(intervalOption: String, interval: Long): Long? {
-    return intervalOptionToSeconds[intervalOption]?.times(interval)
+//    return intervalOptionToSeconds[intervalOption]?.times(interval)
+    return interval / intervalOptionToSeconds[intervalOption]!!
 }
