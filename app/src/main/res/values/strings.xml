@@ -22,5 +22,6 @@
     <string name="wisdom_push">Wisdom push!</string>
     <string name="log_tag">Wisdom_app_log_tag</string>
     <string name="notification_question">notification_question</string>
+    <string name="repatingQuestionBundle">repatingQuestionBundle</string>
 </resources>
 

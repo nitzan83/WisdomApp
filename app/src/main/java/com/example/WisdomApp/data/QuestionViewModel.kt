@@ -54,7 +54,7 @@ class QuestionViewModel(application: Application) : AndroidViewModel(application
         val todoBundle = Bundle()
         todoBundle.putParcelable(R.string.notification_question.toString(), question)
 
-        intent.putExtra("bundle", todoBundle)
+        intent.putExtra(R.string.repatingQuestionBundle.toString(), todoBundle)
 
 
         val pendingIntent = PendingIntent.getBroadcast(

@@ -21,21 +21,13 @@ class AlarmReceiver : BroadcastReceiver() {
             NotificationManager::class.java
         ) as NotificationManager
 
-        val todoBundle = intent.getBundleExtra("bundle")
+        val todoBundle = intent.getBundleExtra(R.string.repatingQuestionBundle.toString())
 
         if (todoBundle != null) {
-
             val question = todoBundle.getParcelable<Question>(R.string.notification_question.toString())
             if (question != null) {
                 notificationManager.sendNotification(question.question, context)
             }
-
-//            question.question.let { q ->  }
         }
-//        val question: Question? = intent.getParcelableExtra(R.string.notification_question.toString())
-//        question?.question?.let { q -> notificationManager.sendNotification(q, context) }
-//
-//        val hello = intent.extras?.get("hello")
-//        hello?.let { q -> notificationManager.sendNotification(q as String, context) }
     }
 }
