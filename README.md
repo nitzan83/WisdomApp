@@ -1,4 +1,8 @@
 # WisdomApp
 Just a cool app to organize your reminders
-https://github.com/nitzan83/WisdomApp
+
+
+
+Basic design
+
 ![](images/widsom_design.jpeg)
