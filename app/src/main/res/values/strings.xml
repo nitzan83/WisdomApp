@@ -14,12 +14,13 @@
     <string name="title_activity_question_details">QuestionDetails</string>
     <string name="nitzan">HEY nitzan here</string>
     <string name="question_notification_channel_id">question_channel</string>
-    <string name="notification_title">My cool title!</string>
+    <string name="notification_title">Time for a question!</string>
     <string name="wisdom_notification_channel_description">Wisdom reminder</string>
     <string name="wisdom_notification_channel_id">wisdom_channel</string>
     <string name="wisdom_notification_channel_name">Wisdom</string>
     <string name="delete">Delete</string>
     <string name="wisdom_push">Wisdom push!</string>
     <string name="log_tag">Wisdom_app_log_tag</string>
+    <string name="notification_question">notification_question</string>
 </resources>
 

@@ -5,6 +5,7 @@ import android.app.Application
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -14,6 +15,7 @@ import com.example.WisdomApp.R
 import com.example.WisdomApp.notification.AlarmReceiver
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+
 
 class QuestionViewModel(application: Application) : AndroidViewModel(application) {
     private val repository: QuestionRepository
@@ -47,9 +49,19 @@ class QuestionViewModel(application: Application) : AndroidViewModel(application
         val id = repository.insert(question)
         Log.v(R.string.log_tag.toString(), "New question id ${question.questionId}")
 
+        val intent = getAlarmIntent()
+
+        val todoBundle = Bundle()
+        todoBundle.putParcelable(R.string.notification_question.toString(), question)
+
+        intent.putExtra("bundle", todoBundle)
+
+
         val pendingIntent = PendingIntent.getBroadcast(
             getApplication(),
-            id.toInt(), getAlarmIntent(), PendingIntent.FLAG_UPDATE_CURRENT
+            id.toInt(),
+            intent,
+            PendingIntent.FLAG_UPDATE_CURRENT
         )
 
         this@QuestionViewModel.alarmManager.setInexactRepeating(

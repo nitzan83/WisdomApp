@@ -8,8 +8,10 @@ import android.util.Log
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.example.WisdomApp.R
+import com.example.WisdomApp.data.Question
 
-class AlarmReceiver: BroadcastReceiver() {
+
+class AlarmReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
         Log.v(R.string.log_tag.toString(), "in onReceive for ")
@@ -19,9 +21,21 @@ class AlarmReceiver: BroadcastReceiver() {
             NotificationManager::class.java
         ) as NotificationManager
 
-        notificationManager.sendNotification(
-            context.getText(R.string.nitzan).toString(),
-            context
-        )
+        val todoBundle = intent.getBundleExtra("bundle")
+
+        if (todoBundle != null) {
+
+            val question = todoBundle.getParcelable<Question>(R.string.notification_question.toString())
+            if (question != null) {
+                notificationManager.sendNotification(question.question, context)
+            }
+
+//            question.question.let { q ->  }
+        }
+//        val question: Question? = intent.getParcelableExtra(R.string.notification_question.toString())
+//        question?.question?.let { q -> notificationManager.sendNotification(q, context) }
+//
+//        val hello = intent.extras?.get("hello")
+//        hello?.let { q -> notificationManager.sendNotification(q as String, context) }
     }
 }
